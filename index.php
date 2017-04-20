@@ -61,7 +61,7 @@ foreach($rowKey as $value) {
 }
 
 /** render the result strings via Twig template engine */
-$loader = new Twig_Loader_Filesystem(__DIR__.'/templates/index.phtml');
+$loader = new Twig_Loader_Filesystem(__DIR__.'/templates');
 $twig = new Twig_Environment($loader);
 
 echo $twig->render('index.phtml', [
