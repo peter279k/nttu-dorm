@@ -50,7 +50,7 @@ foreach ($listFeed->getEntries() as $entry) {
         $rowValue .= '<tr>';
     }
     foreach($representative as $key => $value) {
-        $rowValue .= '<tr>'.$value.'</tr>';
+        $rowValue .= '<td>'.$value.'</td>';
     }
     $rowValue .= '</tr>';
     $count += 1;
