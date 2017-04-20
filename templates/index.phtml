@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>City lists</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bower_components/pure/pure-min.css">
+    <link rel="stylesheet" href="assets/css/side-menu.css">
+</head>
+<body>
+    <div id="layout">
+        <div id="main">
+        <div class="header">
+            <h1>105學年度第2學期 知本學苑 包裹掛號信件登記簿 (本表單僅供參考，實際簽領情形仍以紙本包裹簽領本為主)</h1>
+            <h2>1052宿舍包裹掛號</h2>
+        </div>
+        <div class="content">
+            <h2 class="content-subhead">包裹列表</h2>
+            <table class="pure-table table-width">
+                <thead>
+                    <tr>
+                        {{ row_names|raw }}
+                    </tr>
+                </thead>
+                <tbody>{{ row_values|raw }}</tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
