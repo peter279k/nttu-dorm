@@ -1,4 +1,4 @@
 *.phar
 vendor
-*.json
+client_secret.json
 
