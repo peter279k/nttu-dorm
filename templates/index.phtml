@@ -7,11 +7,33 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" />
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.ie.min.css" />
+    <![endif]-->
+    <style>
+        .github-fork-ribbon.right-top:before {
+            background-color: #090;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
+        <a class="github-fork-ribbon right-top" href="https://github.com/peter279k/nttu-dorm" title="Fork me on GitHub">Fork me on GitHub</a>
         <h1>1052宿舍包裹掛號</h1>
         <p>105學年度第2學期 知本學苑 包裹掛號信件登記簿 (本表單僅供參考，實際簽領情形仍以紙本包裹簽領本為主)</p>
+        <p>訂閱包裹通知，讓你不再遺漏訊息！</p>
+        <form class="form-inline" method="POST" action="/subscribe">
+            <div class="form-group">
+                <label for="email">請輸入email:</label>
+                <input type="email" class="form-control" id="email" placeholder="輸入email">
+            </div>
+            <div class="form-group">
+                <label for="student-number">請輸入學號:</label>
+                <input type="text" class="form-control" id="student-number" placeholder="輸入學號">
+            </div>
+            <button type="submit" class="btn btn-success">訂閱</button>
+        </form>
         <div class="table-responsive">
             <table class="table">
                 <thead>

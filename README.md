@@ -4,5 +4,8 @@ The copy of this [spread sheet](https://docs.google.com/spreadsheets/d/1oEhwj-l7
 # TO DO
 - add e-mail account and student number
 - add subscribe button
-- add unsubscribe nutton
+- add unsubscribe button (in the newsletter)
+- send mail via mailjet (API or PHP library)
+- access DB to add the user record through Doctrine2 (ORM)
+- design the newsletter template
 
