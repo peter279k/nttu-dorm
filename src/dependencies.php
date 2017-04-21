@@ -23,35 +23,53 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
+// register csrf with container
+$container['csrf'] = function ($c) {
+    return new \Slim\Csrf\Guard;
+};
+
+// Service factory for the ORM
+$container['db'] = function ($container) {
+    $capsule = new \Illuminate\Database\Capsule\Manager;
+    $capsule->addConnection($container['settings']['db']);
+
+    $capsule->setAsGlobal();
+    $capsule->bootEloquent();
+
+    return $capsule;
+};
+
 // register the HomeController
-$container['HomeController'] = function($c) {
+$container[App\HomeController::class] = function($c) {
     $view = $c->get('renderer');
     $logger = $c->get('logger');
+    $csrf = $c->get('csrf');
     // retrieve the 'view' from the container
-    return new HomeController($view, $logger);
+    return new App\HomeController($view, $logger, $csrf);
 };
 
 // register the SubController
-$container['SubController'] = function($c) {
+$container[App\SubController::class] = function($c) {
     $view = $c->get('renderer');
     $logger = $c->get('logger');
+    $table = $c->get('db')->table('email');
     // retrieve the 'view' from the container
-    return new SubController($view, $logger);
+    return new App\SubController($view, $logger, $table);
 };
 
 // register the StatusController
-$container['StatusController'] = function($c) {
+$container[App\StatusController::class] = function($c) {
     $view = $c->get('renderer');
     $logger = $c->get('logger');
     // retrieve the 'view' from the container
-    return new StatusController($view, $logger);
+    return new App\StatusController($view, $logger);
 };
 
 $container['notFoundHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
         return $c['response']
             ->withStatus(404)
-            ->withHeader('Location', '/404');
+            ->withHeader('Location', '/status/404');
     };
 };
 
@@ -59,6 +77,6 @@ $container['notAllowedHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
         return $c['response']
             ->withStatus(405)
-            ->withHeader('Location', '/405');
+            ->withHeader('Location', '/status/405');
     };
 };

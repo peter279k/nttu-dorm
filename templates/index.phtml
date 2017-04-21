@@ -26,12 +26,9 @@
         <form class="form-inline" method="POST" action="/subscribe">
             <div class="form-group">
                 <label for="email">請輸入email:</label>
-                <input type="email" class="form-control" id="email" placeholder="輸入email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="輸入email">
             </div>
-            <div class="form-group">
-                <label for="student-number">請輸入學號:</label>
-                <input type="text" class="form-control" id="student-number" placeholder="輸入學號">
-            </div>
+            {{ csrf_token|raw }}
             <button type="submit" class="btn btn-success">訂閱</button>
         </form>
         <div class="table-responsive">

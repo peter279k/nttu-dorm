@@ -1,53 +1,47 @@
 <?php
 
+namespace App;
+
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use Google\Spreadsheet\ServiceRequestFactory;
-use Google\Spreadsheet\DefaultServiceRequest;
-use Google\Spreadsheet\SpreadsheetService;
 
 class HomeController {
     protected $renderer;
     protected $logger;
 
-    public function __construct(\Slim\Views\Twig $renderer, \Monolog\Logger $logger) {
+    public function __construct(\Slim\Views\Twig $renderer, \Monolog\Logger $logger, \Slim\Csrf\Guard $csrf) {
         $this->renderer = $renderer;
         $this->logger = $logger;
+        $this->csrf = $csrf;
     }
     public function home(Request $request, Response $response, array $args) {
-        $this->processHome($response);
+        $this->processHome($request, $response);
     }
-    private function processHome(Response $response) {
+    private function processHome(Request $req, Response $response) {
+        // CSRF token name and value
+        $nameKey = $this->csrf->getTokenNameKey();
+        $valueKey = $this->csrf->getTokenValueKey();
+        $name = $req->getAttribute($nameKey);
+        $value = $req->getAttribute($valueKey);
+
         // Route Root path log message
         $this->logger->info("Index-View '/' route");
         $args = $this->reqDormList();
         // Render the index view
+        $args['csrf_token'] = '<input type="hidden" name="'.$nameKey.'" value="'.$name.'">'.'<input type="hidden" name="'.$valueKey.'" value="'.$value.'">';
         return $this->renderer->render($response, 'index.phtml', $args);
     }
     private function iniSpreadsheet() {
-        putenv('GOOGLE_APPLICATION_CREDENTIALS='.__DIR__.'/client_secret.json');
-        $client = new Google_Client;
-        $client->useApplicationDefaultCredentials();
-        $client->setApplicationName('NTTU Dorm Room Mail Lists');
-        $client->setScopes([
-            'https://www.googleapis.com/auth/drive',
-            'https://spreadsheets.google.com/feeds'
-        ]);
-        if($client->isAccessTokenExpired()) {
-            $client->refreshTokenWithAssertion();
-        }
-        $accessToken = $client->fetchAccessTokenWithAssertion()['access_token'];
-
-        ServiceRequestFactory::setInstance(
-            new DefaultServiceRequest($accessToken)
-        );
-        // Get our spreadsheet
-        $spreadsheetService = new SpreadsheetService;
-        return $spreadsheet = $spreadsheetService->getPublicSpreadsheet('1oEhwj-l7YZiCnu6CCqbY-leJ7_oSFlz3_MIWr2kZPxg');
+        $spreadsheet = new Spreadsheet();
+        return $spreadsheet->iniSpreadsheet();
     }
     private function reqDormList() {
         $spreadsheet = $this->iniSpreadsheet();
+        if(is_array($spreadsheet)) {
+            return $spreadsheet;
+        }
         // Get the first worksheet (tab)
+        var_dump($spreadsheet);
         $worksheets = $spreadsheet->getEntries();
         $worksheet = $worksheets[0];
 
@@ -81,9 +75,12 @@ class HomeController {
             $rowName .= '<th>'.$value.'</th>';
         }
 
-        return [
+        $result = [
             'row_names' => $rowName,
             'row_values' => $rowValue
         ];
+        file_put_contents(__DIR__.'/../templates/cache.txt', json_encode($result));
+
+        return $result;
     }
 }

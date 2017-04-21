@@ -11,9 +11,12 @@ return [
 
         // Monolog settings
         'logger' => [
-            'name' => 'slim-app',
+            'name' => 'nttu-dorm-app',
             'path' => __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+
+        // Register Eloquent ORM
+        'db' => json_decode(file_get_contents(__DIR__.'/db_secret2.json'), true),
     ],
 ];

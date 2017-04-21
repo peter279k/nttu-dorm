@@ -29,6 +29,10 @@ require __DIR__.'/../src/middleware.php';
 // Register routes
 require __DIR__.'/../src/routes.php';
 
+// Register the required libraries
+require __DIR__.'/../src/Spreadsheet.php';
+require __DIR__.'/../src/EmailService.php';
+
 // Register Controllers
 require __DIR__.'/../src/HomeController.php';
 require __DIR__.'/../src/SubController.php';
