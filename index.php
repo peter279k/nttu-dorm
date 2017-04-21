@@ -44,19 +44,23 @@ $count = 0;
 foreach ($listFeed->getEntries() as $entry) {
     $representative = $entry->getValues();
     $rowKey = array_keys($representative);
+    $theKey = array_splice($rowKey, 1);
     if($count % 2 === 1) {
-       $rowValue .= '<tr class="pure-table-odd">';
+       $rowValue .= '<tr class="active">';
     } else {
         $rowValue .= '<tr>';
     }
-    foreach($representative as $key => $value) {
-        $rowValue .= '<td>'.$value.'</td>';
+    foreach($theKey as $key) {
+        if($key === '宿舍包裹編號' && $representative[$key] === '') {
+            break;
+        }
+        $rowValue .= '<td>'.$representative[$key].'</td>';
     }
     $rowValue .= '</tr>';
     $count += 1;
 }
 
-foreach($rowKey as $value) {
+foreach($theKey as $value) {
     $rowName .= '<th>'.$value.'</th>';
 }
 
