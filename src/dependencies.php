@@ -65,6 +65,15 @@ $container[App\StatusController::class] = function($c) {
     return new App\StatusController($view, $logger);
 };
 
+// register the NewsletterController
+$container[App\NewsletterController::class] = function($c) {
+    $view = $c->get('renderer');
+    $logger = $c->get('logger');
+    $table = $c->get('db')->table('email');
+    // retrieve the 'view' from the container
+    return new App\NewsletterController($view, $logger, $table);
+};
+
 $container['notFoundHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
         return $c['response']

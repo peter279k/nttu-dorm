@@ -41,7 +41,6 @@ class HomeController {
             return $spreadsheet;
         }
         // Get the first worksheet (tab)
-        var_dump($spreadsheet);
         $worksheets = $spreadsheet->getEntries();
         $worksheet = $worksheets[0];
 

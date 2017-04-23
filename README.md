@@ -6,5 +6,5 @@ The copy of this [spread sheet](https://docs.google.com/spreadsheets/d/1oEhwj-l7
 - add unsubscribe button (in the newsletter)
 - send mail via SwiftMailer (API or PHP library)
 - access DB to add the user record via Eloquent (ORM)
-- design the newsletter template
+- design the newsletter template and send newsletter (not yet...)
 

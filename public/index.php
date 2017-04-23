@@ -37,6 +37,7 @@ require __DIR__.'/../src/EmailService.php';
 require __DIR__.'/../src/HomeController.php';
 require __DIR__.'/../src/SubController.php';
 require __DIR__.'/../src/StatusController.php';
+require __DIR__.'/../src/NewsletterController.php';
 
 // Run app
 $app->run();
