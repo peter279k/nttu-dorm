@@ -3,8 +3,8 @@ The copy of this [spread sheet](https://docs.google.com/spreadsheets/d/1oEhwj-l7
 
 # TO DO
 - ~~add subscribe button~~
-- add unsubscribe button (in the newsletter)
-- send mail via SwiftMailer (API or PHP library)
-- access DB to add the user record via Eloquent (ORM)
-- design the newsletter template and send newsletter (not yet...)
+- ~~add unsubscribe button (in the newsletter)~~
+- ~~send mail via SwiftMailer (API or PHP library)~~
+- ~~access DB to add the user record via Eloquent (ORM)~~
+- ~~design the newsletter template and send newsletter~~
 
