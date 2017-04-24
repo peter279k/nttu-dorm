@@ -23,6 +23,7 @@ class EmailService {
             $mailer = $this->createMailer();
 
             $htmlString = file_get_contents(__DIR__.'/../templates/newsletter.html');
+            $htmlString = str_replace('[[unsubscribe_uri]]', 'http://dorm.nttu.biz/unconfirm?email='.$this->to, $htmlString);
             $htmlString = str_replace('[[email_address]]', $this->to, $htmlString);
             $htmlString = str_replace('[[newsletter_content]]', $mailContent, $htmlString);
 
@@ -54,7 +55,7 @@ class EmailService {
             $htmlString = file_get_contents(__DIR__.'/../templates/confirm.html');
             $htmlString = str_replace('[[email_address]]', $this->to, $htmlString);
 
-            $htmlString = str_replace('[[confirm_link]]', 'http://localhost:5000/confirm?email='.$this->to, $htmlString);
+            $htmlString = str_replace('[[confirm_link]]', 'http://dorm.nttu.biz/confirm?email='.$this->to, $htmlString);
 
             // Create a message
             $message = \Swift_Message::newInstance($this->subject)

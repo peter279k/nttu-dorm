@@ -1,5 +1,5 @@
-*.phar
-vendor
+composer.phar
+vendor/
 client_secret.json
 db_secret.json
 smtp_secret.json

@@ -17,6 +17,6 @@ return [
         ],
 
         // Register Eloquent ORM
-        'db' => json_decode(file_get_contents(__DIR__.'/db_secret2.json'), true),
+        'db' => json_decode(file_get_contents(__DIR__.'/db_secret.json'), true),
     ],
 ];

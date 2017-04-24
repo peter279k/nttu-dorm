@@ -57,16 +57,19 @@ class NewsletterController {
             }
 
             $receiveDate = $representative['收件日期'];
-            $year = 1910 + (int)($receiveDate{0}.$receiveDate{1}.$receiveDate{2});
+            $year = 1911 + (int)($receiveDate{0}.$receiveDate{1}.$receiveDate{2});
             $month = $receiveDate{3}.$receiveDate{4};
             $day = $receiveDate{5}.$receiveDate{6};
             $receiveDate = strtotime(date($year.'-'.$month.'-'.$day));
             if($today === $receiveDate) {
                 $nameString = str_replace('[[the_name]]', $representative['收件人姓名'], $nameStr);
                 $importantKey = [
-                    '宿舍包裹編號', '收件日期', '送貨單位', '寢室房號', '件數'
+                    '宿舍包裹編號', '收件日期', '送貨單位', '寢室房號', '件數', '備註'
                 ];
                 foreach($importantKey as $thisKey) {
+                    if($representative[$thisKey] === '') {
+                        $representative[$thisKey] = '無';
+                    }
                     $liString .= '
                     <li>
                         <p style="margin: 10px 0;"><span style="font-size:15px">
