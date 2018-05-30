@@ -1,3 +1,6 @@
+# Attention
+It's dprecated because the original SpreadSheet is no longer updated!
+
 # nttu-dorm
 The copy of this [spread sheet](https://docs.google.com/spreadsheets/d/1oEhwj-l7YZiCnu6CCqbY-leJ7_oSFlz3_MIWr2kZPxg/pubhtml)
 
